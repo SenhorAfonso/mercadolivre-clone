@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const validator_1 = __importDefault(require("validator"));
+const isEmail_1 = __importDefault(require("validator/lib/isEmail"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const userSchema = new mongoose_1.default.Schema({
     name: {
@@ -15,9 +15,9 @@ const userSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
         required: [true, 'Please provide an email'],
-        unique: true,
+        unique: [true, 'Email already registered'],
         validate: {
-            validator: validator_1.default.isEmail,
+            validator: isEmail_1.default,
             message: 'Please provide a valid email'
         },
     },
