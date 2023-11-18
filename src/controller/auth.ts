@@ -1,6 +1,7 @@
 
 import { type Request, type Response } from 'express';
 import userModel from '../model/userModel';
+import jwt from 'jsonwebtoken';
 
 // criar token
 // tratar erros unique e validation
@@ -8,10 +9,10 @@ import userModel from '../model/userModel';
 
 const registerNewUser = async (req: Request, res: Response) => {
   const user = req.body;
-  console.log(user);
+  const token = jwt.sign({user: user.name}, 'secreteKey', {expiresIn: '30d'});
   const newUser = await userModel.create(req.body);
 
-  res.send(newUser);
+  res.send({token, newUser});
 };
 
 export {
