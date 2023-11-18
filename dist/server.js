@@ -25,9 +25,12 @@ app.get('*', (req, res) => {
 const start = async () => {
     try {
         dotenv_1.default.config();
-        const mongoURL = process.env.MONGO_URI;
-        if (mongoURL != null) {
-            await (0, connect_1.default)(mongoURL);
+        const mongoURI = process.env.MONGO_URI;
+        if (mongoURI != null) {
+            await (0, connect_1.default)(mongoURI)
+                .then(() => {
+                console.log('conectado');
+            });
         }
     }
     catch (error) {
