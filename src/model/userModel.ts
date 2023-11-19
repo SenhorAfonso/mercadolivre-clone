@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function() {
   console.clear();
-  console.log(this.password, this.name, this.email);
   if (typeof (this.password) !== 'string') {
     throw new Error('Please provide a password');
   }

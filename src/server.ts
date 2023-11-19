@@ -7,10 +7,11 @@ import ecommerce from './routes/ecommerce';
 import path from 'path';
 
 const app = express();
-const publicPath = path.resolve(__dirname, 'public');
-console.log(publicPath);
 
-app.use(express.static(publicPath));
+app.use('/img',express.static(path.join(__dirname, '../src/public/img')));
+app.use('/js',express.static(path.join(__dirname, '/public/js')));
+app.use('/css',express.static(path.join(__dirname, '../src/public/css')));
+
 app.use(express.json());
 
 app.set('views', path.resolve(__dirname.replace('dist', 'src'), 'views'));
