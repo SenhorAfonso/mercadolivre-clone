@@ -1,6 +1,7 @@
 import express from 'express';
 
-import { registerNewUser } from '../controller/auth';
+import { loginUser, registerNewUser } from '../controller/auth';
+import { authenticationMiddleware } from '../middleware/authentication';
 
 const router = express.Router();
 
@@ -10,8 +11,6 @@ router.get('/auth', (req, res) => {
 
 router.post('/register', registerNewUser);
 
-router.post('/login', (req, res) => {
-  res.render('login');
-});
+router.post('/login', authenticationMiddleware, loginUser);
 
 export = router;
